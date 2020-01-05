@@ -7,9 +7,13 @@ notests *default:
 
   install:
     - Vostok.Throttling.Metrics/bin/Release/netstandard2.0/Vostok.Throttling.Metrics.dll
+    - module vostok.metrics
+    - module vostok.throttling
 
   deps:
     - vostok.devtools
+    - vostok.metrics
+    - vostok.throttling
 
 full-build > notests:
   build:
