@@ -1,5 +1,6 @@
 ﻿using System;
 using JetBrains.Annotations;
+using Vostok.Metrics;
 
 namespace Vostok.Throttling.Metrics
 {
@@ -7,19 +8,10 @@ namespace Vostok.Throttling.Metrics
     public static class IMetricContextExtensions
     {
         [NotNull]
-        public static IDisposable CreateThrottlingMetrics([NotNull] IThrottlingProvider provider)
-        {
-            // TODO(iloktionov): capacity limit
-            // TODO(iloktionov): queue limit
-            // TODO(iloktionov): max consumed capacity
-            // TODO(iloktionov): max capacity utilization
-            // TODO(iloktionov): max queue size
-            // TODO(iloktionov): max queue utilization
-            // TODO(iloktionov): max consumption by property by value
-            // TODO(iloktionov): counter by rejection reason
-            // TODO(iloktionov): summary by wait time
-
-            throw new NotImplementedException();
-        }
+        public static IDisposable CreateThrottlingMetrics(
+            [NotNull] this IMetricContext context,
+            [NotNull] IThrottlingProvider provider,
+            [CanBeNull] ThrottlingMetricsOptions options = null)
+            => new ThrottlingMetrics(provider, context, options ?? new ThrottlingMetricsOptions());
     }
 }
