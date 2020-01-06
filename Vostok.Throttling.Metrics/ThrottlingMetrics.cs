@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using JetBrains.Annotations;
 using Vostok.Metrics;
 using Vostok.Metrics.Grouping;
@@ -22,6 +24,8 @@ namespace Vostok.Throttling.Metrics
         private readonly IFloatingGauge maxCapacityUtilization;
         private readonly IFloatingGauge maxQueueUtilization;
 
+        private readonly Dictionary<string, IMetricGroup1<IIntegerGauge>> maxConsumptionPerProperty;
+
         public ThrottlingMetrics(
             [NotNull] IThrottlingProvider provider,
             [NotNull] IMetricContext metricContext,
@@ -43,6 +47,14 @@ namespace Vostok.Throttling.Metrics
             maxQueueLimit = metricContext.CreateIntegerGauge("maxQueueLimit", integerGaugeConfig);
             maxQueueSize = metricContext.CreateIntegerGauge("maxQueueSize", integerGaugeConfig);
             maxQueueUtilization = metricContext.CreateFloatingGauge("maxQueueUtilization", floatingGaugeConfig);
+
+            maxConsumptionPerProperty = options.PropertiesWithConsumptionTracking
+                .ToDictionary(
+                    property => property,
+                    property => metricContext
+                        .WithTag("scope", "property")
+                        .WithTag("propertyName", property)
+                        .CreateIntegerGauge("maxConsumption", "propertyValue", integerGaugeConfig));
         }
 
         public void Dispose()
@@ -60,12 +72,13 @@ namespace Vostok.Throttling.Metrics
             (maxQueueLimit as IDisposable)?.Dispose();
             (maxQueueSize as IDisposable)?.Dispose();
             (maxQueueUtilization as IDisposable)?.Dispose();
+
+            foreach (var gauge in maxConsumptionPerProperty.Values)
+                (gauge as IDisposable)?.Dispose();
         }
 
         public void OnNext(IThrottlingEvent evt)
         {
-            // TODO(iloktionov): max consumption by property + value
-
             maxCapacityLimit.TryIncreaseTo(evt.CapacityLimit);
             maxCapacityConsumed.TryIncreaseTo(evt.CapacityConsumed);
             maxCapacityUtilization.TryIncreaseTo(ComputeUtilization(evt.CapacityConsumed, evt.CapacityLimit));
@@ -73,6 +86,15 @@ namespace Vostok.Throttling.Metrics
             maxQueueLimit.TryIncreaseTo(evt.QueueLimit);
             maxQueueSize.TryIncreaseTo(evt.QueueSize);
             maxQueueUtilization.TryIncreaseTo(ComputeUtilization(evt.QueueSize, evt.QueueLimit));
+
+            foreach (var pair in maxConsumptionPerProperty)
+            {
+                if (evt.Properties.TryGetValue(pair.Key, out var propertyValue) &&
+                    evt.PropertyConsumption.TryGetValue(pair.Key, out var consumption))
+                {
+                    pair.Value.For(propertyValue).TryIncreaseTo(consumption);
+                }
+            }
         }
 
         public void OnNext(IThrottlingResult result)
