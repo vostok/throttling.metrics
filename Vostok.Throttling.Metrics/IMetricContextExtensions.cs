@@ -28,6 +28,6 @@ namespace Vostok.Throttling.Metrics
             [NotNull] this IMetricContext context,
             [NotNull] IThrottlingProvider provider,
             [CanBeNull] ThrottlingMetricsOptions options = null)
-            => new ThrottlingMetrics(provider, context.WithTag("component", "throttling"), options ?? new ThrottlingMetricsOptions());
+            => new ThrottlingMetrics(provider, context.WithTag(WellKnownTagKeys.Component, "throttling"), options ?? new ThrottlingMetricsOptions());
     }
 }
