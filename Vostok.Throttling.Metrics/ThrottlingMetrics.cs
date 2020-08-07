@@ -34,11 +34,21 @@ namespace Vostok.Throttling.Metrics
             eventSubscription = provider.Subscribe(this as IObserver<IThrottlingEvent>);
             resultSubscription = provider.Subscribe(this as IObserver<IThrottlingResult>);
 
-            waitTimeSummary = metricContext.CreateSummary("queueWaitTime");
-            rejectionCounter = metricContext.CreateCounter("rejectionsCount", "status");
-
             var integerGaugeConfig = new IntegerGaugeConfig {InitialValue = 0, ResetOnScrape = true};
             var floatingGaugeConfig = new FloatingGaugeConfig {InitialValue = 0, ResetOnScrape = true};
+            var summaryConfig = new SummaryConfig();
+            var counterConfig = new CounterConfig();
+            if (options.ScrapePeriod != null)
+            {
+                integerGaugeConfig.ScrapePeriod = options.ScrapePeriod;
+                floatingGaugeConfig.ScrapePeriod = options.ScrapePeriod;
+                summaryConfig.ScrapePeriod = options.ScrapePeriod;
+                counterConfig.ScrapePeriod = options.ScrapePeriod;
+                counterConfig.AggregationParameters = new Dictionary<string, string>().SetAggregationPeriod(options.ScrapePeriod.Value);
+            }
+
+            waitTimeSummary = metricContext.CreateSummary("queueWaitTime", summaryConfig);
+            rejectionCounter = metricContext.CreateCounter("rejectionsCount", "status", counterConfig);
 
             maxCapacityLimit = metricContext.CreateIntegerGauge("maxCapacityLimit", integerGaugeConfig);
             maxCapacityConsumed = metricContext.CreateIntegerGauge("maxCapacityConsumed", integerGaugeConfig);
