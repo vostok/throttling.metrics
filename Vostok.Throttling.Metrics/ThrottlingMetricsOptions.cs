@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using JetBrains.Annotations;
 
 namespace Vostok.Throttling.Metrics
@@ -14,5 +15,11 @@ namespace Vostok.Throttling.Metrics
         {
             WellKnownThrottlingProperties.Consumer
         };
+
+        /// <summary>
+        /// Period of scraping throttling metrics. If left <c>null</c>, context default period will be used.
+        /// </summary>
+        [CanBeNull]
+        public TimeSpan? ScrapePeriod { get; set; }
     }
 }
