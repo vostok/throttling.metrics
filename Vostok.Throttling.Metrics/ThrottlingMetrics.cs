@@ -25,7 +25,6 @@ namespace Vostok.Throttling.Metrics
         private readonly IFloatingGauge maxQueueUtilization;
 
         private readonly Dictionary<string, IMetricGroup1<IIntegerGauge>> maxConsumptionPerProperty;
-        private readonly long propertyConsumptionTrackingThreshold;
 
         public ThrottlingMetrics(
             [NotNull] IThrottlingProvider provider,
@@ -36,7 +35,6 @@ namespace Vostok.Throttling.Metrics
             resultSubscription = provider.Subscribe(this as IObserver<IThrottlingResult>);
 
             var integerGaugeConfig = new IntegerGaugeConfig {InitialValue = 0, ResetOnScrape = true};
-            var propertiesGaugeConfig = new IntegerGaugeConfig { InitialValue = 0, ResetOnScrape = true, SendZeroValues = false };
             var floatingGaugeConfig = new FloatingGaugeConfig {InitialValue = 0, ResetOnScrape = true};
             var summaryConfig = new SummaryConfig();
             var counterConfig = new CounterConfig();
@@ -66,8 +64,7 @@ namespace Vostok.Throttling.Metrics
                     property => metricContext
                         .WithTag("scope", "property")
                         .WithTag("propertyName", property)
-                        .CreateIntegerGauge("maxConsumption", "propertyValue", propertiesGaugeConfig));
-            propertyConsumptionTrackingThreshold = options.PropertyConsumptionTrackingThreshold;
+                        .CreateIntegerGauge("maxConsumption", "propertyValue", integerGaugeConfig));
         }
 
         public void Dispose()
@@ -103,8 +100,7 @@ namespace Vostok.Throttling.Metrics
             foreach (var pair in maxConsumptionPerProperty)
             {
                 if (evt.Properties.TryGetValue(pair.Key, out var propertyValue) &&
-                    evt.PropertyConsumption.TryGetValue(pair.Key, out var consumption) &&
-                    consumption >= propertyConsumptionTrackingThreshold)
+                    evt.PropertyConsumption.TryGetValue(pair.Key, out var consumption))
                 {
                     pair.Value.For(propertyValue).TryIncreaseTo(consumption);
                 }
