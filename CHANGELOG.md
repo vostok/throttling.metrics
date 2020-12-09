@@ -1,8 +1,4 @@
-## 0.1.3 (28-11-2020):
-
-Reverted potentially dangerous changes from 0.1.2.
-
-## 0.1.2 (27-11-2020):
+## 0.1.4 (09-12-2020):
 
 Added `PropertyConsumptionTrackingThreshold` setting.
 

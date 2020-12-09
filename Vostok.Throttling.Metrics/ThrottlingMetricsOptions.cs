@@ -17,6 +17,11 @@ namespace Vostok.Throttling.Metrics
         };
 
         /// <summary>
+        /// Minimum value of property consumption to track.
+        /// </summary>
+        public long PropertyConsumptionTrackingThreshold { get; set; }
+
+        /// <summary>
         /// Period of scraping throttling metrics. If left <c>null</c>, context default period will be used.
         /// </summary>
         [CanBeNull]
