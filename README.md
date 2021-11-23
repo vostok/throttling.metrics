@@ -1,6 +1,6 @@
 # Vostok.Throttling.Metrics
 
-[![Build status](https://ci.appveyor.com/api/projects/status/github/vostok/throttling.metrics?svg=true&branch=master)](https://ci.appveyor.com/project/vostok/throttling.metrics/branch/master)
+[![Build & Test & Publish](https://github.com/vostok/throttling.metrics/actions/workflows/ci.yml/badge.svg)](https://github.com/vostok/throttling.metrics/actions/workflows/ci.yml)
 [![NuGet](https://img.shields.io/nuget/v/Vostok.Throttling.Metrics.svg)](https://www.nuget.org/packages/Vostok.Throttling.Metrics)
 
 Implementation of throttling metrics for HTTP services.
