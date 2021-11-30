@@ -24,11 +24,11 @@
   <ItemGroup>
     <Reference Include="Vostok.Throttling">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\vostok.throttling\Vostok.Throttling\bin\Release\netstandard2.0\Vostok.Throttling.dll</HintPath>
+      <HintPath>..\..\vostok.throttling\Vostok.Throttling\bin\Release\$(ReferencesFramework)\Vostok.Throttling.dll</HintPath>
     </Reference>
     <Reference Include="Vostok.Metrics">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\vostok.metrics\Vostok.Metrics\bin\Release\netstandard2.0\Vostok.Metrics.dll</HintPath>
+      <HintPath>..\..\vostok.metrics\Vostok.Metrics\bin\Release\$(ReferencesFramework)\Vostok.Metrics.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>
