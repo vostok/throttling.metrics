@@ -1,3 +1,7 @@
+## 0.1.5 (06-12-2021):
+
+Added `net6.0` target.
+
 ## 0.1.4 (09-12-2020):
 
 Added `PropertyConsumptionTrackingThreshold` setting.
