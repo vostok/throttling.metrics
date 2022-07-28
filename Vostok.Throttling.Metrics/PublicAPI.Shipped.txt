@@ -1,0 +1,9 @@
+static Vostok.Throttling.Metrics.IMetricContextExtensions.CreateThrottlingMetrics(this Vostok.Metrics.IMetricContext context, Vostok.Throttling.IThrottlingProvider provider, Vostok.Throttling.Metrics.ThrottlingMetricsOptions options = null) -> System.IDisposable
+Vostok.Throttling.Metrics.IMetricContextExtensions
+Vostok.Throttling.Metrics.ThrottlingMetricsOptions
+Vostok.Throttling.Metrics.ThrottlingMetricsOptions.PropertiesWithConsumptionTracking -> System.Collections.Generic.List<string>
+Vostok.Throttling.Metrics.ThrottlingMetricsOptions.PropertyConsumptionTrackingThreshold.get -> long
+Vostok.Throttling.Metrics.ThrottlingMetricsOptions.PropertyConsumptionTrackingThreshold.set -> void
+Vostok.Throttling.Metrics.ThrottlingMetricsOptions.ScrapePeriod.get -> System.TimeSpan?
+Vostok.Throttling.Metrics.ThrottlingMetricsOptions.ScrapePeriod.set -> void
+Vostok.Throttling.Metrics.ThrottlingMetricsOptions.ThrottlingMetricsOptions() -> void
