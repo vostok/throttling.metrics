@@ -1,0 +1,7 @@
+Vostok.Throttling.Metrics.ThrottlingMetrics
+Vostok.Throttling.Metrics.ThrottlingMetrics.Dispose() -> void
+Vostok.Throttling.Metrics.ThrottlingMetrics.OnCompleted() -> void
+Vostok.Throttling.Metrics.ThrottlingMetrics.OnError(System.Exception error) -> void
+Vostok.Throttling.Metrics.ThrottlingMetrics.OnNext(Vostok.Throttling.IThrottlingEvent evt) -> void
+Vostok.Throttling.Metrics.ThrottlingMetrics.OnNext(Vostok.Throttling.IThrottlingResult result) -> void
+Vostok.Throttling.Metrics.ThrottlingMetrics.ThrottlingMetrics(Vostok.Throttling.IThrottlingProvider provider, Vostok.Metrics.IMetricContext metricContext, Vostok.Throttling.Metrics.ThrottlingMetricsOptions options) -> void
