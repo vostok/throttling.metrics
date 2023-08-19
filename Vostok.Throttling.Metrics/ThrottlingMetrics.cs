@@ -10,7 +10,7 @@ using Vostok.Metrics.Primitives.Timer;
 
 namespace Vostok.Throttling.Metrics
 {
-    internal class ThrottlingMetrics : IDisposable, IObserver<IThrottlingEvent>, IObserver<IThrottlingResult>
+    public class ThrottlingMetrics : IDisposable, IObserver<IThrottlingEvent>, IObserver<IThrottlingResult>
     {
         private readonly IDisposable eventSubscription;
         private readonly IDisposable resultSubscription;
