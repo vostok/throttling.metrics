@@ -7,3 +7,10 @@ Vostok.Throttling.Metrics.ThrottlingMetricsOptions.PropertyConsumptionTrackingTh
 Vostok.Throttling.Metrics.ThrottlingMetricsOptions.ScrapePeriod.get -> System.TimeSpan?
 Vostok.Throttling.Metrics.ThrottlingMetricsOptions.ScrapePeriod.set -> void
 Vostok.Throttling.Metrics.ThrottlingMetricsOptions.ThrottlingMetricsOptions() -> void
+Vostok.Throttling.Metrics.ThrottlingMetrics
+Vostok.Throttling.Metrics.ThrottlingMetrics.Dispose() -> void
+Vostok.Throttling.Metrics.ThrottlingMetrics.OnCompleted() -> void
+Vostok.Throttling.Metrics.ThrottlingMetrics.OnError(System.Exception error) -> void
+Vostok.Throttling.Metrics.ThrottlingMetrics.OnNext(Vostok.Throttling.IThrottlingEvent evt) -> void
+Vostok.Throttling.Metrics.ThrottlingMetrics.OnNext(Vostok.Throttling.IThrottlingResult result) -> void
+Vostok.Throttling.Metrics.ThrottlingMetrics.ThrottlingMetrics(Vostok.Throttling.IThrottlingProvider provider, Vostok.Metrics.IMetricContext metricContext, Vostok.Throttling.Metrics.ThrottlingMetricsOptions options) -> void
