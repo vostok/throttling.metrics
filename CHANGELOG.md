@@ -1,3 +1,7 @@
+## 0.1.7 (14-09-2023):
+
+Made `ThrottlingMetrics` public.
+
 ## 0.1.6 (06-12-2021):
 
 Added `net6.0` target.
