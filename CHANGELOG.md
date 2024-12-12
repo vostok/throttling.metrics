@@ -1,3 +1,7 @@
+## 0.1.8 (12-12-2024): 
+
+Bump NuGet deps versions
+
 ## 0.1.7 (14-09-2023):
 
 Made `ThrottlingMetrics` public.
