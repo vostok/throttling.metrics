@@ -9,6 +9,25 @@ notests *default:
     - Vostok.Throttling.Metrics/bin/Release/netstandard2.0/Vostok.Throttling.Metrics.dll
     - module vostok.metrics
     - module vostok.throttling
+    - groups:
+        - target-framework: "netstandard2.0"
+          libraries:
+            - Vostok.Throttling.Metrics/bin/Release/netstandard2.0/Vostok.Throttling.Metrics.dll
+          modules:
+            - name: vostok.metrics
+            - name: vostok.throttling
+        - target-framework: "net6.0"
+          libraries:
+            - Vostok.Throttling.Metrics/bin/Release/net6.0/Vostok.Throttling.Metrics.dll
+          modules:
+            - name: vostok.metrics
+            - name: vostok.throttling
+        - target-framework: "net8.0"
+          libraries:
+            - Vostok.Throttling.Metrics/bin/Release/net8.0/Vostok.Throttling.Metrics.dll
+          modules:
+            - name: vostok.metrics
+            - name: vostok.throttling
 
   deps:
     - vostok.devtools
@@ -20,6 +39,32 @@ full-build > notests:
     - -vostok.devtools
     - vostok.devtools@with-net6.0
 
+  install:
+    - Vostok.Throttling.Metrics/bin/Release/netstandard2.0/Vostok.Throttling.Metrics.dll
+    - module vostok.metrics
+    - module vostok.throttling
+    - groups:
+        - target-framework: "netstandard2.0"
+          libraries:
+            - Vostok.Throttling.Metrics/bin/Release/netstandard2.0/Vostok.Throttling.Metrics.dll
+          modules:
+            - name: vostok.metrics
+            - name: vostok.throttling
+        - target-framework: "net6.0"
+          libraries:
+            - Vostok.Throttling.Metrics/bin/Release/net6.0/Vostok.Throttling.Metrics.dll
+          modules:
+            - name: vostok.metrics
+            - name: vostok.throttling
+        - target-framework: "net8.0"
+          libraries:
+            - Vostok.Throttling.Metrics/bin/Release/net8.0/Vostok.Throttling.Metrics.dll
+          modules:
+            - name: vostok.metrics
+            - name: vostok.throttling
+
   build:
     target: Vostok.Throttling.Metrics.sln
     configuration: Release
+    tool:
+      name: dotnet
