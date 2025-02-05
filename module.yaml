@@ -35,10 +35,6 @@ notests *default:
     - vostok.throttling
 
 full-build > notests:
-  deps:
-    - -vostok.devtools
-    - vostok.devtools@with-net6.0
-
   install:
     - Vostok.Throttling.Metrics/bin/Release/netstandard2.0/Vostok.Throttling.Metrics.dll
     - module vostok.metrics
